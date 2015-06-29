@@ -1,5 +1,36 @@
 var scene = new THREE.Scene();
-var Camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
 var renderer = new THREE.WebGLRenderer();
-renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setClearColor( 0xffffff, 1);
+document.body.appendChild( renderer.domElement );
+
+var geometry = new THREE.BoxGeometry( 2, 1, 2 );
+var material = new THREE.MeshBasicMaterial( { color: "#C2F2F1" } );
+var cube = new THREE.Mesh( geometry, material );
+
+var shape = new THREE.BoxGeometry( 1, 5, 1 );
+var color = new THREE.MeshBasicMaterial( { color: "#D3848E" } );
+var cube2 = new THREE.Mesh(shape, color);
+
+scene.add( cube );
+scene.add( cube2 );
+
+camera.position.z = 7;
+
+var render = function () {
+	requestAnimationFrame( render );
+
+	// cube2.rotation.x += 0.1;
+	cube2.rotation.y -= 0.1;
+	// cube2.rotation.z += 0.1;
+
+	// cube.rotation.x += 0.1;
+	cube.rotation.y += 0.1;
+	// cube.rotation.z += 0.01;
+
+	renderer.render(scene, camera);
+};
+
+render();
